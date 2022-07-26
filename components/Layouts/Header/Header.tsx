@@ -3,7 +3,7 @@ const Header = () => {
     <div className="header_wrap">
       <header className="header">
         <div className="header_logo">
-          <h1>고졸국뷔 게시판</h1>
+          <h1>Header Logo</h1>
         </div>
       </header>
       <nav className="header_nav_wrap">
