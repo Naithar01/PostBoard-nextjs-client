@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 import UserLoginTemplate from "../../components/User/Login/UserLoginTemplate";
 
+interface IUserLoginUseState {
+  username: string;
+  password: string;
+}
+
 const UserLoginPage = () => {
-  const [userLoginInputState, setUserLoginInputState] = useState<{
-    username: string;
-    password: string;
-  }>({
-    username: "",
-    password: "",
-  });
+  const [userLoginInputState, setUserLoginInputState] =
+    useState<IUserLoginUseState>({
+      username: "",
+      password: "",
+    });
 
   const UserLoginInputStateChangeHandler = (
     e: React.ChangeEvent<HTMLInputElement>
