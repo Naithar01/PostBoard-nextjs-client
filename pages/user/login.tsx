@@ -4,6 +4,7 @@ import UserLoginTemplate from "../../components/User/Login/UserLoginTemplate";
 interface IUserLoginUseState {
   username: string;
   password: string;
+  rememberme: boolean;
 }
 
 const UserLoginPage = () => {
@@ -11,11 +12,19 @@ const UserLoginPage = () => {
     useState<IUserLoginUseState>({
       username: "",
       password: "",
+      rememberme: false,
     });
 
   const UserLoginInputStateChangeHandler = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
+    if (e.target.name === "rememberme") {
+      setUserLoginInputState({
+        ...userLoginInputState,
+        [e.target.name]: e.target.checked,
+      });
+      return;
+    }
     setUserLoginInputState({
       ...userLoginInputState,
       [e.target.name]: e.target.value,
