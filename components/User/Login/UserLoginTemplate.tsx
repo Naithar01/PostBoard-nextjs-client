@@ -37,6 +37,15 @@ const UserLoginTemplate = ({
           onChange={UserLoginInputStateChangeHandler}
         />
       </div>
+      <div className="user_login_remember_me">
+        <label htmlFor="rememberme">Remember me</label>
+        <input
+          type="checkbox"
+          id="rememberme"
+          name="rememberme"
+          onChange={UserLoginInputStateChangeHandler}
+        />
+      </div>
       <div className="user_login_button">
         <button type="button" onClick={UserLoginSubmitHandler}>
           Login
