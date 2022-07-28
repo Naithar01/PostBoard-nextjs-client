@@ -1,17 +1,32 @@
+import Link from "next/link";
+import { useState } from "react";
+import styles from "../../../styles/layouts/header.module.css";
+
 const Header = () => {
+  const [showHeaderNavigation, setShowHeaderNavigation] = useState(false);
+
+  const ShowHeaderNavigationHandler = () => {
+    setShowHeaderNavigation(!showHeaderNavigation);
+    return;
+  };
+
   return (
-    <div className="header_wrap">
+    <div className={styles.header_wrap}>
       <header className="header">
-        <div className="header_logo">
-          <h1>Header Logo</h1>
-        </div>
+        <p className={styles.header_logo}>
+          <Link href="/">Header Logo</Link>
+        </p>
       </header>
       <nav className="header_nav_wrap">
-        <div className="left_header_wrap">
-          <ul className="left_header_menu"></ul>
-        </div>
         <div className="right_header_wrap">
-          <ul className="right_header_menu"></ul>
+          <ul className={styles.right_header_menu}>
+            <li className={styles.right_header_menu_item}>
+              <Link href="/user/login">Login</Link>
+            </li>
+            <li className={styles.right_header_menu_item}>
+              <Link href="/user/register">Register</Link>
+            </li>
+          </ul>
         </div>
       </nav>
     </div>
