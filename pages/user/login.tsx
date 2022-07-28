@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PageHeader from "../../components/Layouts/PageHeader/PageHeader";
 import UserLoginTemplate from "../../components/User/Login/UserLoginTemplate";
 
 interface IUserLoginUseState {
@@ -43,7 +44,7 @@ const UserLoginPage = () => {
 
   return (
     <div className="user_login">
-      <h3>User Login Page</h3>
+      <PageHeader header_text="User Login Page" />
       <UserLoginTemplate
         UserLoginInputStateChangeHandler={UserLoginInputStateChangeHandler}
         UserLoginSubmitHandler={UserLoginSubmitHandler}

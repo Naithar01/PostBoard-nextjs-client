@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PageHeader from "../../components/Layouts/PageHeader/PageHeader";
 import UserRegisterTemplate from "../../components/User/Register/UserRegisterTemplate";
 
 interface IUserRegisterUseState {
@@ -38,7 +39,7 @@ const UserRegisterPage = () => {
 
   return (
     <div className="user_register">
-      <h3>User Register Page</h3>
+      <PageHeader header_text="User Register Page" />
       <UserRegisterTemplate
         UserRegisterInputStateChangeHandler={
           UserRegisterInputStateChangeHandler
