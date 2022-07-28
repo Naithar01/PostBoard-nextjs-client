@@ -1,3 +1,58 @@
 .user_login_form {
-    margin: 20px 0px 0px 0px;
+    max-width: 270px;
+    margin: 20px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+}
+
+@media screen and (max-width: 560px) {
+    .user_login_form {
+        max-width: 270px;
+        margin: 20px auto 0px auto;
+        border: 2px solid #ddd;
+        border-radius: 5px;
+    }
+        
+}
+
+.user_login_header {
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+}
+
+.user_login_input, .user_login_button  {
+    padding: 10px;
+}
+
+.user_login_remember_me {
+    position: relative;
+    padding: 0px 10px;
+}
+
+.user_login_remember_me input {
+    position: absolute;
+    top: 7px;
+    right: 136px;
+}
+
+.user_login_input > label {
+    display: block;
+    margin: 0px 0px 5px 0px;
+}
+
+.user_login_input > input {
+    width: 97%;
+    font-size: 15px;
+    padding: 5px 2px;
+    border: 2px solid #ddd;
+    border-radius: 3px;
+    outline: none;
+}
+
+.user_login_button > button {
+    width: 100%;
+    background-color: rgb(89 169 255);
+    border: none;
+    height: 30px;
+    border-radius: 5px;
 }
