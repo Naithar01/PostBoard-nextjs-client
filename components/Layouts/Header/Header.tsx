@@ -5,11 +5,6 @@ import styles from "../../../styles/layouts/header.module.css";
 const Header = () => {
   const [showHeaderNavigation, setShowHeaderNavigation] = useState(false);
 
-  const ShowHeaderNavigationHandler = () => {
-    setShowHeaderNavigation(!showHeaderNavigation);
-    return;
-  };
-
   return (
     <div className={styles.header_wrap}>
       <header className="header">
