@@ -1,3 +1,47 @@
 .user_register_form {
-    margin: 20px 0px 0px 0px;
+  max-width: 270px;
+  margin: 20px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+}
+
+@media screen and (max-width: 560px) {
+  .user_register_form {
+    margin: 20px auto 0px auto;
+  }
+}
+
+.user_register_header {
+  border-bottom: 1px solid #ddd;
+  padding: 10px;
+}
+
+.user_register_input,
+.user_register_password_check,
+.user_register_button {
+  padding: 10px;
+}
+
+.user_register_input > label,
+.user_register_password_check > label {
+  display: block;
+  margin: 0px 0px 5px 0px;
+}
+
+.user_register_input > input,
+.user_register_password_check > input {
+  width: 97%;
+  font-size: 15px;
+  padding: 5px 2px;
+  border: 2px solid #ddd;
+  border-radius: 3px;
+  outline: none;
+}
+
+.user_register_button > button {
+  width: 100%;
+  background-color: rgb(89 169 255);
+  border: none;
+  height: 30px;
+  border-radius: 5px;
 }

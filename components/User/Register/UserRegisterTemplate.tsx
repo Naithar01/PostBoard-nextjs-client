@@ -15,7 +15,10 @@ const UserRegisterTemplate = ({
 }: IProps) => {
   return (
     <form className={styles.user_register_form}>
-      <div className="user_register_input">
+      <div className={styles.user_register_header}>
+        <p>Register</p>
+      </div>
+      <div className={styles.user_register_input}>
         <label htmlFor="username">UserName</label>
         <input
           type="text"
@@ -26,7 +29,7 @@ const UserRegisterTemplate = ({
           onChange={UserRegisterInputStateChangeHandler}
         />
       </div>
-      <div className="user_register_input">
+      <div className={styles.user_register_input}>
         <label htmlFor="password">Password</label>
         <input
           type="text"
@@ -37,7 +40,7 @@ const UserRegisterTemplate = ({
           onChange={UserRegisterInputStateChangeHandler}
         />
       </div>
-      <div className="user_register_password_check">
+      <div className={styles.user_register_password_check}>
         <label htmlFor="password_check">Password Check</label>
         <input
           type="text"
@@ -48,7 +51,7 @@ const UserRegisterTemplate = ({
           onChange={UserRegisterInputStateChangeHandler}
         />
       </div>
-      <div className="user_register_button">
+      <div className={styles.user_register_button}>
         <button type="button" onClick={UserRegisterSubmitHandler}>
           Register
         </button>
