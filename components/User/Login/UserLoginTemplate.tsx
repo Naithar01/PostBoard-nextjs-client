@@ -15,7 +15,10 @@ const UserLoginTemplate = ({
 }: IProps) => {
   return (
     <form className={styles.user_login_form}>
-      <div className="user_login_input">
+      <header className={styles.user_login_header}>
+        <p>Login</p>
+      </header>
+      <div className={styles.user_login_input}>
         <label htmlFor="username">UserName</label>
         <input
           type="text"
@@ -26,7 +29,7 @@ const UserLoginTemplate = ({
           onChange={UserLoginInputStateChangeHandler}
         />
       </div>
-      <div className="user_login_input">
+      <div className={styles.user_login_input}>
         <label htmlFor="password">Password</label>
         <input
           type="text"
@@ -37,7 +40,7 @@ const UserLoginTemplate = ({
           onChange={UserLoginInputStateChangeHandler}
         />
       </div>
-      <div className="user_login_remember_me">
+      <div className={styles.user_login_remember_me}>
         <label htmlFor="rememberme">Remember me</label>
         <input
           type="checkbox"
@@ -46,7 +49,7 @@ const UserLoginTemplate = ({
           onChange={UserLoginInputStateChangeHandler}
         />
       </div>
-      <div className="user_login_button">
+      <div className={styles.user_login_button}>
         <button type="button" onClick={UserLoginSubmitHandler}>
           Login
         </button>
