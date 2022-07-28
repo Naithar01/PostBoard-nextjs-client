@@ -32,6 +32,12 @@ const UserLoginPage = () => {
   };
 
   const UserLoginSubmitHandler = () => {
+    if (
+      userLoginInputState.username.trim().length === 0 ||
+      userLoginInputState.password.trim().length === 0
+    ) {
+      return alert(".");
+    }
     console.log(userLoginInputState);
   };
 
