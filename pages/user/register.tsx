@@ -25,9 +25,16 @@ const UserRegisterPage = () => {
   };
 
   const UserRegisterSubmitHandler = () => {
+    if (
+      userRegisterInputState.username.trim().length === 0 ||
+      userRegisterInputState.password.trim().length === 0 ||
+      userRegisterInputState.password_check.trim().length === 0
+    ) {
+      return alert(".");
+    }
+
     console.log(userRegisterInputState);
-    
-  }
+  };
 
   return (
     <div className="user_register">
