@@ -1,7 +1,8 @@
-import React from "react";
+import React, { Fragment } from "react";
 import Header from "./Header/Header";
 
 import styles from "../../styles/layouts/layout.module.css";
+import Head from "next/head";
 
 interface IProps {
   children: React.ReactNode;
@@ -9,10 +10,15 @@ interface IProps {
 
 const Layout = ({ children }: IProps) => {
   return (
-    <div className={styles.container}>
-      <Header />
-      {children}
-    </div>
+    <Fragment>
+      <Head>
+        <title>Board</title>
+      </Head>
+      <div className={styles.container}>
+        <Header />
+        {children}
+      </div>
+    </Fragment>
   );
 };
 
