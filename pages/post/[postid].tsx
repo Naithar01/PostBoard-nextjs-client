@@ -1,7 +1,11 @@
 import { GetStaticPaths, GetStaticProps } from "next";
 import { ParsedUrlQuery } from "querystring";
+import PageHeader from "../../components/Layouts/PageHeader/PageHeader";
+import { GetPost, GetPostById } from "../../Lib/Post";
 
-import { DUMMY_POST, Post } from "./index";
+import { Post } from "./index";
+
+import styles from "../../styles/post/postread.module.css";
 
 interface IParams extends ParsedUrlQuery {
   id: string;
@@ -12,11 +16,23 @@ interface IProps {
 }
 
 const PostReadPage = ({ post }: IProps) => {
-  return <div className="post_read_page">{JSON.stringify(post)}</div>;
+  return (
+    <div className="post_read_page">
+      <PageHeader header_text={post.title} />
+      <header className={styles.post_read_page_header}>
+        <p className={styles.post_read_page_header_author}>{post.author}</p>
+        <small>{new Date(post.create_at).toLocaleString()}</small>
+      </header>
+      <div className={styles.post_read_page_content}>{post.content}</div>
+    </div>
+  );
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = DUMMY_POST.map((post) => ({
+  const res = await GetPost();
+  const posts: Post[] = await res.json();
+
+  const paths = posts.map((post) => ({
     params: { postid: post.id },
   }));
 
@@ -28,7 +44,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
   const { postid } = ctx.params as IParams;
-  const post = DUMMY_POST.filter((post) => post.id !== postid);
+  const res = await GetPostById(postid);
+  const post: Post[] = await res.json();
 
   return {
     props: {

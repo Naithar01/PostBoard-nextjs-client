@@ -2,6 +2,7 @@ import { GetServerSideProps } from "next";
 import { Fragment } from "react";
 import PageHeader from "../../components/Layouts/PageHeader/PageHeader";
 import PostItem from "../../components/Post/PostItem";
+import { GetPost } from "../../Lib/Post";
 
 import styles from "../../styles/post/post.module.css";
 
@@ -17,23 +18,6 @@ interface IProps {
   post: Post[];
 }
 
-export const DUMMY_POST: Post[] = [
-  {
-    id: "11-aa",
-    author: "user1",
-    title: "title1",
-    content: "content1",
-    create_at: "2022-08-02",
-  },
-  {
-    id: "22-bb",
-    author: "user1231",
-    title: "title12131",
-    content: "content123121",
-    create_at: "2022-08-02",
-  },
-];
-
 const PostMainPage = ({ post }: IProps) => {
   return (
     <div className="post_main_page">
@@ -42,7 +26,7 @@ const PostMainPage = ({ post }: IProps) => {
         <p>[Written Post Count: {post.length}]</p>
       </div>
       <div className={styles.post_item_list}>
-        {DUMMY_POST.map((post, index) => (
+        {post.map((post, index) => (
           <PostItem post={post} key={post.id} />
         ))}
       </div>
@@ -51,9 +35,12 @@ const PostMainPage = ({ post }: IProps) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const res = await GetPost();
+  const posts: Post[] = await res.json();
+
   return {
     props: {
-      post: DUMMY_POST,
+      post: posts,
     },
   };
 };
