@@ -1,0 +1,26 @@
+.post_item_list {
+  margin: 20px 0px 0px 0px;
+}
+
+.post_item {
+  margin: 0px 0px 50px 0px;
+}
+
+.post_item_header_title {
+  font-size: 17px;
+  margin: 0px 10px 0px 0px;
+}
+
+.post_item_author {
+  opacity: 0.8;
+  font-size: small;
+}
+
+.post_item_content {
+  font-size: 20px;
+  margin: 10px 0px 0px 0px;
+}
+
+.post_item_create_at > a {
+  color: #0969da;
+}
