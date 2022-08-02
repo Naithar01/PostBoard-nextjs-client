@@ -21,6 +21,9 @@ const Header = () => {
             <li className={styles.right_header_menu_item}>
               <Link href="/user/register">Register</Link>
             </li>
+            <li className={styles.right_header_menu_item}>
+              <Link href="/post">Posts</Link>
+            </li>
           </ul>
         </div>
       </nav>
