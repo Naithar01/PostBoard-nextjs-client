@@ -1,6 +1,7 @@
 ## Post Page
 * Post List를 보여줄 Index Page
 * 북마크? 
+* Post 페이지 접속시 redux (User) isLogin = false 이면 로그인 페이지로 이동하기 추가 
 
 ## User
 * 1. 서버로부터 로그인 성공과, token 정보를 받으면 Redux로 id, username, token 보냄, 
