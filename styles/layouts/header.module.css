@@ -19,3 +19,10 @@
   color: white;
   margin: 0px 8px;
 }
+
+.right_header_menu_item_user_logout {
+  background: none;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}

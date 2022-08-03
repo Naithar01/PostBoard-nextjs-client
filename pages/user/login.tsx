@@ -39,7 +39,7 @@ const UserLoginPage = () => {
     ) {
       return alert(".");
     }
-    console.log(userLoginInputState);
+    console.log();
   };
 
   return (
@@ -56,3 +56,4 @@ const UserLoginPage = () => {
 export default UserLoginPage;
 
 // https://intrepidgeeks.com/tutorial/jwt-certification-mainly-frontend
+// https://davidhwang.netlify.app/TIL/(0320)nextjs%EC%97%90%EC%84%9C-next-cookies-%EC%82%AC%EC%9A%A9-%EC%9D%B4%EC%8A%88/

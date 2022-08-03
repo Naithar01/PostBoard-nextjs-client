@@ -1,21 +1,20 @@
 import Link from "next/link";
 import { Fragment, useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { logoutUser } from "../../../store/reducers/userSlice";
+import { RootState } from "../../../store/store";
 import styles from "../../../styles/layouts/header.module.css";
 
 const Header = () => {
+  const dispatch = useDispatch();
+  const user = useSelector((state: RootState) => state.user);
   const [showHeaderNavigation, setShowHeaderNavigation] = useState(false);
-  const [isLogin, setIsLogin] = useState<boolean>(false);
-  const [cookies, setCookie] = useCookies();
 
-  useEffect(() => {
-    const { test } = cookies;
-    if (test) {
-      setIsLogin(true);
-    } else {
-      setIsLogin(false);
-    }
-  }, [cookies]);
+  const UserLogoutHandler = () => {
+    dispatch(logoutUser());
+  };
 
   return (
     <div className={styles.header_wrap}>
@@ -28,7 +27,7 @@ const Header = () => {
         <div className="right_header_wrap">
           <ul className={styles.right_header_menu}>
             {/* No Login */}
-            {!isLogin && (
+            {!user.isLogin && (
               <Fragment>
                 <li className={styles.right_header_menu_item}>
                   <Link href="/user/login">Login</Link>
@@ -39,10 +38,19 @@ const Header = () => {
               </Fragment>
             )}
             {/* Login */}
-            {isLogin && (
+            {user.isLogin && (
               <Fragment>
                 <li className={styles.right_header_menu_item}>
                   <Link href="/post">Posts</Link>
+                </li>
+                <li className={styles.right_header_menu_item}>
+                  <button
+                    type="button"
+                    className={styles.right_header_menu_item_user_logout}
+                    onClick={UserLogoutHandler}
+                  >
+                    LogOut
+                  </button>
                 </li>
               </Fragment>
             )}
