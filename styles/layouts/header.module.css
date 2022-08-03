@@ -1,9 +1,11 @@
 .header_wrap {
+  background-color: black;
+  color: white;
+  padding: 5px 10px;
   display: flex;
   align-content: center;
   justify-content: space-between;
   position: relative;
-  margin: 10px 5px;
 }
 
 .header_logo {
@@ -14,6 +16,6 @@
   display: inline-block;
   line-height: 30px;
   list-style: none;
-  color: #0969da;
+  color: white;
   margin: 0px 8px;
 }
