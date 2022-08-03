@@ -14,10 +14,8 @@ const Layout = ({ children }: IProps) => {
       <Head>
         <title>Board</title>
       </Head>
-      <div className={styles.container}>
-        <Header />
-        {children}
-      </div>
+      <Header />
+      <div className={styles.container}>{children}</div>
     </Fragment>
   );
 };
