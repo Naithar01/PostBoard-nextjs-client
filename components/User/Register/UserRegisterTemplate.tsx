@@ -15,9 +15,9 @@ const UserRegisterTemplate = ({
 }: IProps) => {
   return (
     <form className={styles.user_register_form}>
-      <div className={styles.user_register_header}>
+      {/* <div className={styles.user_register_header}>
         <p>Register</p>
-      </div>
+      </div> */}
       <div className={styles.user_register_input}>
         <label htmlFor="username">UserName</label>
         <input

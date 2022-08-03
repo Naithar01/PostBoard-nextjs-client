@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { Post } from "../../pages/post";
+import { Post } from "../../../pages/post";
 
-import styles from "../../styles/post/post.module.css";
+import styles from "../../../styles/post/post.module.css";
 
 interface IProps {
   post: Post;
