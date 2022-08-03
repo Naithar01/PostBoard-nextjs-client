@@ -8,4 +8,5 @@
 
 .post_read_page_content {
   font-size: 18px;
+  white-space: pre-line;
 }

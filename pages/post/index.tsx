@@ -1,7 +1,7 @@
 import { GetServerSideProps } from "next";
 import { Fragment } from "react";
 import PageHeader from "../../components/Layouts/PageHeader/PageHeader";
-import PostItem from "../../components/Post/PostItem";
+import PostItem from "../../components/Post/Read/PostItem";
 import { GetPost } from "../../Lib/Post";
 
 import styles from "../../styles/post/post.module.css";
