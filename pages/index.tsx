@@ -1,4 +1,6 @@
 import type { NextPage } from "next";
+import { useEffect } from "react";
+import { useCookies } from "react-cookie";
 
 const Home: NextPage = () => {
   return (
