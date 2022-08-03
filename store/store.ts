@@ -1,13 +1,22 @@
-import { configureStore } from "@reduxjs/toolkit";
-import { Context, createWrapper } from "next-redux-wrapper";
-import reducer from "./reducers";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+import thunk from "redux-thunk";
 
-const makeStore = (context: Context) =>
-  configureStore({
-    reducer,
-    devTools: process.env.NODE_ENV !== "production",
-  });
+import userSlice from "./reducers/userSlice";
 
-export const wrapper = createWrapper(makeStore, {
-  debug: true,
+const reducers = combineReducers({
+  user: userSlice,
+});
+
+const persistConfig = {
+  key: "root",
+  storage,
+};
+
+const persistedReducer = persistReducer(persistConfig, reducers);
+
+export const store = configureStore({
+  reducer: persistedReducer,
+  middleware: [thunk],
 });

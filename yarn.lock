@@ -160,6 +160,20 @@
     "@types/scheduler" "*"
     "csstype" "^3.0.2"
 
+"@types/redux-persist@^4.3.1":
+  "integrity" "sha512-YkMnMUk+4//wPtiSTMfsxST/F9Gh9sPWX0LVxHuOidGjojHtMdpep2cYvQgfiDMnj34orXyZI+QJCQMZDlafKA=="
+  "resolved" "https://registry.npmjs.org/@types/redux-persist/-/redux-persist-4.3.1.tgz"
+  "version" "4.3.1"
+  dependencies:
+    "redux-persist" "*"
+
+"@types/redux-thunk@^2.1.0":
+  "integrity" "sha512-8M+kcrnZQYO3A40d8a1lieBFur/ab8EXHqa2dGMQqsmBaVCbNp3gd8ed/HuSjLoLA63ov/trXaXWlkiKVF4VUw=="
+  "resolved" "https://registry.npmjs.org/@types/redux-thunk/-/redux-thunk-2.1.0.tgz"
+  "version" "2.1.0"
+  dependencies:
+    "redux-thunk" "*"
+
 "@types/scheduler@*":
   "integrity" "sha512-hppQEBDmlwhFAXKJX2KnWLYu5yMfi91yazPb2l+lbJiwW+wdo1gNeRA+3RgNSO39WYX2euey41KEwnqesU2Jew=="
   "resolved" "https://registry.npmjs.org/@types/scheduler/-/scheduler-0.16.2.tgz"
@@ -1208,12 +1222,7 @@
   "resolved" "https://registry.npmjs.org/natural-compare/-/natural-compare-1.4.0.tgz"
   "version" "1.4.0"
 
-"next-redux-wrapper@^7.0.5":
-  "integrity" "sha512-UFXdAWG5i+GFT8+Hoqpx3GArkPh34fVWF9YoA2VSHlBzsrPtnRd7NWM6FNSYUennpommTpWJ09mu+r/1UxyIkg=="
-  "resolved" "https://registry.npmjs.org/next-redux-wrapper/-/next-redux-wrapper-7.0.5.tgz"
-  "version" "7.0.5"
-
-"next@>=10.0.3", "next@12.2.3":
+"next@12.2.3":
   "integrity" "sha512-TA0tmSA6Dk6S6kfvCNbF7CWYW8468gZUxr/3/30z4KvAQbXnl2ASYZElVe7q/hBW/1F1ee0tSBlHa4/sn+ZIBw=="
   "resolved" "https://registry.npmjs.org/next/-/next-12.2.3.tgz"
   "version" "12.2.3"
@@ -1439,7 +1448,7 @@
   "resolved" "https://registry.npmjs.org/react-is/-/react-is-18.2.0.tgz"
   "version" "18.2.0"
 
-"react-redux@*", "react-redux@^7.2.1 || ^8.0.2", "react-redux@^8.0.2":
+"react-redux@^7.2.1 || ^8.0.2", "react-redux@^8.0.2":
   "integrity" "sha512-nBwiscMw3NoP59NFCXFf02f8xdo+vSHT/uZ1ldDwF7XaTpzm+Phk97VT4urYBl5TYAPNVaFm12UHAEyzkpNzRA=="
   "resolved" "https://registry.npmjs.org/react-redux/-/react-redux-8.0.2.tgz"
   "version" "8.0.2"
@@ -1451,19 +1460,24 @@
     "react-is" "^18.0.0"
     "use-sync-external-store" "^1.0.0"
 
-"react@*", "react@^16.8 || ^17.0 || ^18.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^16.9.0 || ^17.0.0 || ^18", "react@^17.0.2 || ^18.0.0-0", "react@^18.2.0", "react@>= 16.3.0", "react@>= 16.8.0 || 17.x.x || ^18.0.0-0", "react@18.2.0":
+"react@^16.8 || ^17.0 || ^18.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^16.9.0 || ^17.0.0 || ^18", "react@^17.0.2 || ^18.0.0-0", "react@^18.2.0", "react@>= 16.3.0", "react@>= 16.8.0 || 17.x.x || ^18.0.0-0", "react@18.2.0":
   "integrity" "sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ=="
   "resolved" "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
   "version" "18.2.0"
   dependencies:
     "loose-envify" "^1.1.0"
 
-"redux-thunk@^2.4.1":
+"redux-persist@*", "redux-persist@^6.0.0":
+  "integrity" "sha512-71LLMbUq2r02ng2We9S215LtPu3fY0KgaGE0k8WRgl6RkqxtGfl7HUozz1Dftwsb0D/5mZ8dwAaPbtnzfvbEwQ=="
+  "resolved" "https://registry.npmjs.org/redux-persist/-/redux-persist-6.0.0.tgz"
+  "version" "6.0.0"
+
+"redux-thunk@*", "redux-thunk@^2.4.1":
   "integrity" "sha512-OOYGNY5Jy2TWvTL1KgAlVy6dcx3siPJ1wTq741EPyUKfn6W6nChdICjZwCd0p8AZBs5kWpZlbkXW2nE/zjUa+Q=="
   "resolved" "https://registry.npmjs.org/redux-thunk/-/redux-thunk-2.4.1.tgz"
   "version" "2.4.1"
 
-"redux@^4", "redux@^4.0.0", "redux@^4.1.2", "redux@^4.2.0":
+"redux@^4", "redux@^4.0.0", "redux@^4.1.2", "redux@^4.2.0", "redux@>4.0.0":
   "integrity" "sha512-oSBmcKKIuIR4ME29/AeNUnl5L+hvBq7OaJWzaptTQJAntaPvxIJqfnjbaEiCzzaIz+XmVILfqAM3Ob0aXLPfjA=="
   "resolved" "https://registry.npmjs.org/redux/-/redux-4.2.0.tgz"
   "version" "4.2.0"
