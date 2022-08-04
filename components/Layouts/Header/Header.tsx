@@ -31,17 +31,6 @@ const Header = () => {
                 <li className={styles.right_header_menu_item}>
                   <Link href="/user/register">Register</Link>
                 </li>
-                <li className={styles.right_header_menu_item}>
-                  <button
-                    type="button"
-                    className={styles.right_header_menu_item_user_logout}
-                    onClick={() => {
-                      dispatch(loginUser());
-                    }}
-                  >
-                    Login
-                  </button>
-                </li>
               </Fragment>
             )}
             {/* Login */}
