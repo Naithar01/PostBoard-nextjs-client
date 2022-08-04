@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { useCookies } from "react-cookie";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,8 +19,9 @@ type LoginSuccessData = {
 };
 
 const UserLoginPage = () => {
+  const router = useRouter();
   const dispatch = useDispatch();
-  const [cookies, setCookie, removeCookie] = useCookies();
+  const [cookies, setCookie] = useCookies();
   const [userLoginInputState, setUserLoginInputState] =
     useState<IUserLoginUseState>({
       username: "",
@@ -43,37 +45,33 @@ const UserLoginPage = () => {
     });
   };
 
+  const LoginFailHandler = () => {
+    alert("Login Fail");
+    router.reload();
+  };
+
   const UserLoginSubmitHandler = async () => {
-    try {
-      if (
-        userLoginInputState.username.trim().length === 0 ||
-        userLoginInputState.password.trim().length === 0
-      ) {
-        return alert("Login Fail");
-      }
-      const res = await LoginUser(
-        userLoginInputState.username,
-        userLoginInputState.password
-      );
-
-      console.log(res);
-      console.log(1);
-
-      const data: LoginSuccessData = await res.json();
-
-      if (data) {
-        dispatch(loginUser());
-        setCookie("token", data.token);
-        setCookie("username", data.user.username);
-        setCookie("password", data.user.password);
-
-        alert("Login Success");
-        return;
-      }
-    } catch (error) {
+    if (
+      userLoginInputState.username.trim().length === 0 ||
+      userLoginInputState.password.trim().length === 0
+    ) {
       alert("Login Fail");
       return;
     }
+    await LoginUser(userLoginInputState.username, userLoginInputState.password)
+      .then((res) => {
+        return res.json();
+      })
+      .then((data: LoginSuccessData) => {
+        if (data && data.token) {
+          setCookie("token", data.token);
+          setCookie("username", data.user.username);
+          setCookie("password", data.user.password);
+        }
+      })
+      .catch((err) => {
+        alert("Login Fail");
+      });
   };
 
   return (
