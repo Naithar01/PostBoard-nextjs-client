@@ -3,7 +3,7 @@ import { Fragment, useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { logoutUser } from "../../../store/reducers/userSlice";
+import { loginUser, logoutUser } from "../../../store/reducers/userSlice";
 import { RootState } from "../../../store/store";
 import styles from "../../../styles/layouts/header.module.css";
 
@@ -11,10 +11,6 @@ const Header = () => {
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.user);
   const [showHeaderNavigation, setShowHeaderNavigation] = useState(false);
-
-  const UserLogoutHandler = () => {
-    dispatch(logoutUser());
-  };
 
   return (
     <div className={styles.header_wrap}>
@@ -35,6 +31,17 @@ const Header = () => {
                 <li className={styles.right_header_menu_item}>
                   <Link href="/user/register">Register</Link>
                 </li>
+                <li className={styles.right_header_menu_item}>
+                  <button
+                    type="button"
+                    className={styles.right_header_menu_item_user_logout}
+                    onClick={() => {
+                      dispatch(loginUser());
+                    }}
+                  >
+                    Login
+                  </button>
+                </li>
               </Fragment>
             )}
             {/* Login */}
@@ -47,7 +54,9 @@ const Header = () => {
                   <button
                     type="button"
                     className={styles.right_header_menu_item_user_logout}
-                    onClick={UserLogoutHandler}
+                    onClick={() => {
+                      dispatch(logoutUser());
+                    }}
                   >
                     LogOut
                   </button>

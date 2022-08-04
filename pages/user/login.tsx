@@ -1,6 +1,10 @@
 import React, { useState } from "react";
+import { useCookies } from "react-cookie";
+import { useDispatch, useSelector } from "react-redux";
 import PageHeader from "../../components/Layouts/PageHeader/PageHeader";
 import UserLoginTemplate from "../../components/User/Login/UserLoginTemplate";
+import { LoginUser } from "../../Lib/User";
+import { loginUser } from "../../store/reducers/userSlice";
 
 interface IUserLoginUseState {
   username: string;
@@ -8,7 +12,14 @@ interface IUserLoginUseState {
   rememberme: boolean;
 }
 
+type LoginSuccessData = {
+  token: string;
+  user: { id: string; username: string; password: string };
+};
+
 const UserLoginPage = () => {
+  const dispatch = useDispatch();
+  const [cookies, setCookie, removeCookie] = useCookies();
   const [userLoginInputState, setUserLoginInputState] =
     useState<IUserLoginUseState>({
       username: "",
@@ -32,14 +43,37 @@ const UserLoginPage = () => {
     });
   };
 
-  const UserLoginSubmitHandler = () => {
-    if (
-      userLoginInputState.username.trim().length === 0 ||
-      userLoginInputState.password.trim().length === 0
-    ) {
-      return alert(".");
+  const UserLoginSubmitHandler = async () => {
+    try {
+      if (
+        userLoginInputState.username.trim().length === 0 ||
+        userLoginInputState.password.trim().length === 0
+      ) {
+        return alert("Login Fail");
+      }
+      const res = await LoginUser(
+        userLoginInputState.username,
+        userLoginInputState.password
+      );
+
+      console.log(res);
+      console.log(1);
+
+      const data: LoginSuccessData = await res.json();
+
+      if (data) {
+        dispatch(loginUser());
+        setCookie("token", data.token);
+        setCookie("username", data.user.username);
+        setCookie("password", data.user.password);
+
+        alert("Login Success");
+        return;
+      }
+    } catch (error) {
+      alert("Login Fail");
+      return;
     }
-    console.log();
   };
 
   return (
