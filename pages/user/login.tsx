@@ -52,6 +52,9 @@ const UserLoginPage = () => {
     }
     await LoginUser(userLoginInputState.username, userLoginInputState.password)
       .then((res) => {
+        if (res.status !== 201) {
+          throw new Error("Username or Password is Wrong");
+        }
         return res.json();
       })
       .then((data: LoginSuccessData) => {
@@ -64,8 +67,8 @@ const UserLoginPage = () => {
           );
         }
       })
-      .catch((err) => {
-        alert("Login Fail");
+      .catch((err: Error) => {
+        alert(`Login Fail\n${err.message}`);
       });
   };
 
