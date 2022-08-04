@@ -1,25 +1,33 @@
-import { NextCookies } from "next/dist/server/web/spec-extension/cookies";
-import { useCookies } from "react-cookie";
 import { Dispatch } from "redux";
-import { loginUser } from "../store/reducers/userSlice";
-import { CookieSetOptions } from "universal-cookie";
+import { loginUser, logoutUser } from "../store/reducers/userSlice";
 import router from "next/router";
+import { Cookies } from "react-cookie";
+
+const cookies = new Cookies();
 
 export const UserLoginAction = (
   token: string,
   username: string,
   password: string,
-  dispatch: Dispatch,
-  setCookie: (
-    name: string,
-    value: any,
-    options?: CookieSetOptions | undefined
-  ) => void
+  dispatch: Dispatch
 ) => {
-  setCookie("token", token);
-  setCookie("username", username);
-  setCookie("password", password);
+  cookies.set("token", token);
+  cookies.set("username", username);
+  cookies.set("password", password);
   dispatch(loginUser());
   alert("Login Success");
   router.push("/post");
+};
+
+export const UserLogoutAction = async (dispatch: Dispatch) => {
+  RemoveUserLoginCookieData();
+  dispatch(logoutUser());
+  alert("Logout");
+  router.push("/");
+};
+
+export const RemoveUserLoginCookieData = () => {
+  cookies.remove("token");
+  cookies.remove("username");
+  cookies.remove("password");
 };

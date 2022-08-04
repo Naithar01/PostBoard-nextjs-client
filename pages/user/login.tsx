@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { useCookies } from "react-cookie";
 import { useDispatch } from "react-redux";
@@ -6,7 +5,6 @@ import { UserLoginAction } from "../../actions/UserActions";
 import PageHeader from "../../components/Layouts/PageHeader/PageHeader";
 import UserLoginTemplate from "../../components/User/Login/UserLoginTemplate";
 import { LoginUser } from "../../Lib/User";
-import { loginUser } from "../../store/reducers/userSlice";
 
 interface IUserLoginUseState {
   username: string;
@@ -15,12 +13,10 @@ interface IUserLoginUseState {
 }
 
 type LoginSuccessData = {
-  token: string;
-  user: { id: string; username: string; password: string };
+  access_token: string;
 };
 
 const UserLoginPage = () => {
-  const router = useRouter();
   const dispatch = useDispatch();
   const [cookies, setCookie] = useCookies();
   const [userLoginInputState, setUserLoginInputState] =
@@ -59,13 +55,12 @@ const UserLoginPage = () => {
         return res.json();
       })
       .then((data: LoginSuccessData) => {
-        if (data && data.token) {
+        if (data && data.access_token) {
           UserLoginAction(
-            data.token,
-            data.user.username,
-            data.user.password,
-            dispatch,
-            setCookie
+            data.access_token,
+            userLoginInputState.username,
+            userLoginInputState.password,
+            dispatch
           );
         }
       })

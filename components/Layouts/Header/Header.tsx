@@ -1,16 +1,14 @@
 import Link from "next/link";
 import { Fragment, useEffect, useState } from "react";
-import { useCookies } from "react-cookie";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { loginUser, logoutUser } from "../../../store/reducers/userSlice";
+import { UserLogoutAction } from "../../../actions/UserActions";
 import { RootState } from "../../../store/store";
 import styles from "../../../styles/layouts/header.module.css";
 
 const Header = () => {
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.user);
-  const [showHeaderNavigation, setShowHeaderNavigation] = useState(false);
 
   return (
     <div className={styles.header_wrap}>
@@ -44,7 +42,7 @@ const Header = () => {
                     type="button"
                     className={styles.right_header_menu_item_user_logout}
                     onClick={() => {
-                      dispatch(logoutUser());
+                      UserLogoutAction(dispatch);
                     }}
                   >
                     LogOut
