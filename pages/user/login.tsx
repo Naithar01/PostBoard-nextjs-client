@@ -1,7 +1,8 @@
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { useCookies } from "react-cookie";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { UserLoginAction } from "../../actions/UserActions";
 import PageHeader from "../../components/Layouts/PageHeader/PageHeader";
 import UserLoginTemplate from "../../components/User/Login/UserLoginTemplate";
 import { LoginUser } from "../../Lib/User";
@@ -45,11 +46,6 @@ const UserLoginPage = () => {
     });
   };
 
-  const LoginFailHandler = () => {
-    alert("Login Fail");
-    router.reload();
-  };
-
   const UserLoginSubmitHandler = async () => {
     if (
       userLoginInputState.username.trim().length === 0 ||
@@ -64,9 +60,13 @@ const UserLoginPage = () => {
       })
       .then((data: LoginSuccessData) => {
         if (data && data.token) {
-          setCookie("token", data.token);
-          setCookie("username", data.user.username);
-          setCookie("password", data.user.password);
+          UserLoginAction(
+            data.token,
+            data.user.username,
+            data.user.password,
+            dispatch,
+            setCookie
+          );
         }
       })
       .catch((err) => {
