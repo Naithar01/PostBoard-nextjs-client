@@ -1,8 +1,15 @@
 import type { NextPage } from "next";
 import { useEffect } from "react";
 import { useCookies } from "react-cookie";
+import { useDispatch } from "react-redux";
+import { CheckUserLogin } from "../actions/UserActions";
 
 const Home: NextPage = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    CheckUserLogin(dispatch);
+  }, []);
+
   return (
     <div>
       <p>Backend - Nest js</p>

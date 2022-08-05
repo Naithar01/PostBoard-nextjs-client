@@ -31,3 +31,15 @@ export const RemoveUserLoginCookieData = () => {
   cookies.remove("username");
   cookies.remove("password");
 };
+
+export const CheckUserLogin = async (dispatch: Dispatch) => {
+  const { token, username, password } = await cookies.getAll();
+
+  if (token && username && password) {
+    return true;
+  } else {
+    dispatch(logoutUser());
+    RemoveUserLoginCookieData();
+    return false;
+  }
+};
