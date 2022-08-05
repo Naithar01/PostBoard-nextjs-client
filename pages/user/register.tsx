@@ -51,9 +51,6 @@ const UserRegisterPage = () => {
         if (res.status !== 201) {
           throw new Error("Enter another Username");
         }
-        return res.json();
-      })
-      .then((data) => {
         router.push("/user/login");
         return alert("Register Success");
       })
