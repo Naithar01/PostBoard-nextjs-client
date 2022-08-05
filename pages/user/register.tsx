@@ -1,6 +1,8 @@
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 import PageHeader from "../../components/Layouts/PageHeader/PageHeader";
 import UserRegisterTemplate from "../../components/User/Register/UserRegisterTemplate";
+import { RegisterUser } from "../../Lib/User";
 
 interface IUserRegisterUseState {
   username: string;
@@ -9,6 +11,7 @@ interface IUserRegisterUseState {
 }
 
 const UserRegisterPage = () => {
+  const router = useRouter();
   const [userRegisterInputState, setUserRegisterInputState] =
     useState<IUserRegisterUseState>({
       username: "",
@@ -25,16 +28,38 @@ const UserRegisterPage = () => {
     });
   };
 
-  const UserRegisterSubmitHandler = () => {
+  const UserRegisterSubmitHandler = async () => {
     if (
       userRegisterInputState.username.trim().length === 0 ||
       userRegisterInputState.password.trim().length === 0 ||
       userRegisterInputState.password_check.trim().length === 0
     ) {
-      return alert(".");
+      return alert("Register Fail");
     }
 
-    console.log(userRegisterInputState);
+    if (
+      userRegisterInputState.password !== userRegisterInputState.password_check
+    ) {
+      return alert("check password, Validate password");
+    }
+
+    await RegisterUser(
+      userRegisterInputState.username,
+      userRegisterInputState.password
+    )
+      .then((res) => {
+        if (res.status !== 201) {
+          throw new Error("Enter another Username");
+        }
+        return res.json();
+      })
+      .then((data) => {
+        router.push("/user/login");
+        return alert("Register Success");
+      })
+      .catch((err) => {
+        alert(`Register Fail\n${err.message}`);
+      });
   };
 
   return (

@@ -18,7 +18,6 @@ type LoginSuccessData = {
 
 const UserLoginPage = () => {
   const dispatch = useDispatch();
-  const [cookies, setCookie] = useCookies();
   const [userLoginInputState, setUserLoginInputState] =
     useState<IUserLoginUseState>({
       username: "",
