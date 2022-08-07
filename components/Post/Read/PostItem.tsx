@@ -15,7 +15,7 @@ const PostItem = ({ post }: IProps) => {
         <small className={styles.post_item_author}>author: {post.author}</small>
       </header>
       <div className={styles.post_item_create_at}>
-        <p>create_at: {post.create_at}</p>
+        <p>create_at: {new Date(post.create_at).toLocaleString()}</p>
         <Link href={`post/${post.id}`}>
           <a>Read</a>
         </Link>
