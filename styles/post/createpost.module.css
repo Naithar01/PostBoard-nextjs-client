@@ -1,0 +1,8 @@
+.post_create_inp > label {
+  display: block;
+}
+
+.post_create_inp > textarea {
+  width: 80%;
+  min-height: 300px;
+}

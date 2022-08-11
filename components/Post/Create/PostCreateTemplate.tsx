@@ -1,15 +1,29 @@
 import React from "react";
 
+import styles from "../../../styles/post/createpost.module.css";
+
 interface IProps {
   CreatePostInputStateChangeHandler: (
-    e: React.ChangeEvent<HTMLInputElement>
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>
   ) => void;
+  PostCreateSubmitHandler: () => void;
+  author: string;
 }
 
-const PostCraeteTemplate = ({ CreatePostInputStateChangeHandler }: IProps) => {
+const PostCraeteTemplate = ({
+  CreatePostInputStateChangeHandler,
+  PostCreateSubmitHandler,
+  author,
+}: IProps) => {
   return (
     <form className="post_create_form">
-      <div className="post_create_inp">
+      <div className="post_author_name">
+        <label>Author: </label>
+        <input value={author} disabled />
+      </div>
+      <div className={styles.post_create_inp}>
         <label htmlFor="title">Title</label>
         <input
           type="text"
@@ -20,10 +34,9 @@ const PostCraeteTemplate = ({ CreatePostInputStateChangeHandler }: IProps) => {
           onChange={CreatePostInputStateChangeHandler}
         />
       </div>
-      <div className="post_create_inp">
+      <div className={styles.post_create_inp}>
         <label htmlFor="content">Content</label>
-        <input
-          type="text"
+        <textarea
           name="content"
           id="content"
           placeholder="Enter ..."
@@ -32,7 +45,9 @@ const PostCraeteTemplate = ({ CreatePostInputStateChangeHandler }: IProps) => {
         />
       </div>
       <div className="post_create_btn">
-        <button type="button">Create</button>
+        <button type="button" onClick={PostCreateSubmitHandler}>
+          Create
+        </button>
       </div>
     </form>
   );

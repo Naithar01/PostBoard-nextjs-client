@@ -38,6 +38,9 @@ const Header = () => {
                   <Link href="/post">Posts</Link>
                 </li>
                 <li className={styles.right_header_menu_item}>
+                  <Link href="/post/create">New Post</Link>
+                </li>
+                <li className={styles.right_header_menu_item}>
                   <button
                     type="button"
                     className={styles.right_header_menu_item_user_logout}

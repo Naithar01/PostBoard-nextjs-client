@@ -10,7 +10,7 @@ export const UserLoginAction = (
   username: string,
   password: string,
   dispatch: Dispatch
-) => {
+): void => {
   cookies.set("token", token);
   cookies.set("username", username);
   cookies.set("password", password);
@@ -19,7 +19,7 @@ export const UserLoginAction = (
   router.push("/post");
 };
 
-export const UserLogoutAction = async (dispatch: Dispatch) => {
+export const UserLogoutAction = (dispatch: Dispatch): void => {
   RemoveUserLoginCookieData();
   dispatch(logoutUser());
   alert("Logout");
@@ -32,7 +32,7 @@ export const RemoveUserLoginCookieData = () => {
   cookies.remove("password");
 };
 
-export const CheckUserLogin = async (dispatch: Dispatch) => {
+export const CheckUserLogin = async (dispatch: Dispatch): Promise<boolean> => {
   const { token, username, password } = await cookies.getAll();
 
   if (token && username && password) {
@@ -42,4 +42,23 @@ export const CheckUserLogin = async (dispatch: Dispatch) => {
     RemoveUserLoginCookieData();
     return false;
   }
+};
+
+export const GetLoginUserDate = async (): Promise<{
+  token: string;
+  username: string;
+  password: string;
+}> => {
+  const { token, username, password } = await cookies.getAll();
+
+  return {
+    token,
+    username,
+    password,
+  };
+};
+
+export const GetLoginUsernameData = async (): Promise<string> => {
+  const { username } = await cookies.getAll();
+  return username;
 };

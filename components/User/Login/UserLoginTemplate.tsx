@@ -15,9 +15,6 @@ const UserLoginTemplate = ({
 }: IProps) => {
   return (
     <form className={styles.user_login_form}>
-      {/* <header className={styles.user_login_header}>
-        <p>Login</p>
-      </header> */}
       <div className={styles.user_login_input}>
         <label htmlFor="username">UserName</label>
         <input
