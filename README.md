@@ -20,3 +20,5 @@
 * 1. 서버 http status 수정 201, 200, 400, 401
 
 * 1. post 메인 페이지 페이징 처리, query page= 1
+
+* 1. Post 생성시 res.status가 201이 아니면 에러 발생 추가
