@@ -23,3 +23,12 @@ export const RegisterUser = async (username: string, password: string) => {
     }),
   });
 };
+
+export const LogoutUser = async () => {
+  return await fetch("http://localhost:4000/api/user/logout", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+};

@@ -2,6 +2,7 @@ import { Dispatch } from "redux";
 import { loginUser, logoutUser } from "../store/reducers/userSlice";
 import router from "next/router";
 import { Cookies } from "react-cookie";
+import { LogoutUser } from "../Lib/User";
 
 const cookies = new Cookies();
 
@@ -11,15 +12,22 @@ export const UserLoginAction = (
   password: string,
   dispatch: Dispatch
 ): void => {
-  cookies.set("token", token);
-  cookies.set("username", username);
-  cookies.set("password", password);
+  cookies.set("token", token, {
+    maxAge: 24 * 60 * 60 * 1000,
+  });
+  cookies.set("username", username, {
+    maxAge: 24 * 60 * 60 * 1000,
+  });
+  cookies.set("password", password, {
+    maxAge: 24 * 60 * 60 * 1000,
+  });
   dispatch(loginUser());
   alert("Login Success");
   router.push("/post");
 };
 
 export const UserLogoutAction = (dispatch: Dispatch): void => {
+  LogoutUser();
   RemoveUserLoginCookieData();
   dispatch(logoutUser());
   alert("Logout");
