@@ -60,4 +60,4 @@ const UserRegisterTemplate = ({
   );
 };
 
-export default UserRegisterTemplate;
+export default React.memo(UserRegisterTemplate);

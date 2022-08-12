@@ -1,4 +1,5 @@
 import Link from "next/link";
+import React from "react";
 import { Post } from "../../../pages/post";
 
 import styles from "../../../styles/post/post.module.css";
@@ -24,4 +25,4 @@ const PostItem = ({ post }: IProps) => {
   );
 };
 
-export default PostItem;
+export default React.memo(PostItem);

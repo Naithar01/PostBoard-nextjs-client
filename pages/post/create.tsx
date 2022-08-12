@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { GetLoginUsernameData } from "../../actions/UserActions";
 import PageHeader from "../../components/Layouts/PageHeader/PageHeader";
@@ -19,23 +19,26 @@ const PostCreatePage = () => {
 
   const [authorInfo, setAuthorInfo] = useState<string>("");
 
-  const GetAuthorName = async () => {
+  const GetAuthorName = useCallback(async () => {
     const username: string = await GetLoginUsernameData();
     setAuthorInfo(username);
-  };
+  }, []);
 
-  const CreatePostInputStateChangeHandler = (
-    e:
-      | React.ChangeEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLTextAreaElement>
-  ) => {
-    setCreatePostInputState({
-      ...createPostInputState,
-      [e.target.name]: e.target.value,
-    });
-  };
+  const CreatePostInputStateChangeHandler = useCallback(
+    (
+      e:
+        | React.ChangeEvent<HTMLInputElement>
+        | React.ChangeEvent<HTMLTextAreaElement>
+    ) => {
+      setCreatePostInputState({
+        ...createPostInputState,
+        [e.target.name]: e.target.value,
+      });
+    },
+    [createPostInputState]
+  );
 
-  const PostCreateSubmitHandler = async () => {
+  const PostCreateSubmitHandler = useCallback(async () => {
     if (
       createPostInputState.title.trim().length === 0 ||
       createPostInputState.content.trim().length === 0
@@ -58,7 +61,12 @@ const PostCreatePage = () => {
       .catch((err) => {
         alert(`Error\n${err.message}`);
       });
-  };
+  }, [
+    cookies,
+    createPostInputState.content,
+    createPostInputState.title,
+    router,
+  ]);
 
   useEffect(() => {
     GetAuthorName();

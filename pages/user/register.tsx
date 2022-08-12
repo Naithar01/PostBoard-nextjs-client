@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import PageHeader from "../../components/Layouts/PageHeader/PageHeader";
 import UserRegisterTemplate from "../../components/User/Register/UserRegisterTemplate";
 import { RegisterUser } from "../../Lib/User";
@@ -19,16 +19,17 @@ const UserRegisterPage = () => {
       password_check: "",
     });
 
-  const UserRegisterInputStateChangeHandler = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setUserRegisterInputState({
-      ...userRegisterInputState,
-      [e.target.name]: e.target.value,
-    });
-  };
+  const UserRegisterInputStateChangeHandler = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setUserRegisterInputState({
+        ...userRegisterInputState,
+        [e.target.name]: e.target.value,
+      });
+    },
+    [userRegisterInputState]
+  );
 
-  const UserRegisterSubmitHandler = async () => {
+  const UserRegisterSubmitHandler = useCallback(async () => {
     if (
       userRegisterInputState.username.trim().length === 0 ||
       userRegisterInputState.password.trim().length === 0 ||
@@ -57,7 +58,7 @@ const UserRegisterPage = () => {
       .catch((err) => {
         alert(`Register Fail\n${err.message}`);
       });
-  };
+  }, [router, userRegisterInputState.password, userRegisterInputState.password_check, userRegisterInputState.username]);
 
   return (
     <div className="user_register">

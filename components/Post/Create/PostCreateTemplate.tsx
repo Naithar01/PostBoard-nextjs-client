@@ -53,4 +53,4 @@ const PostCraeteTemplate = ({
   );
 };
 
-export default PostCraeteTemplate;
+export default React.memo(PostCraeteTemplate);

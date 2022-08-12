@@ -55,4 +55,4 @@ const UserLoginTemplate = ({
   );
 };
 
-export default UserLoginTemplate;
+export default React.memo(UserLoginTemplate);

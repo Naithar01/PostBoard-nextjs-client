@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useCookies } from "react-cookie";
 import { useDispatch } from "react-redux";
 import { UserLoginAction } from "../../actions/UserActions";
@@ -25,23 +25,24 @@ const UserLoginPage = () => {
       rememberme: false,
     });
 
-  const UserLoginInputStateChangeHandler = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    if (e.target.name === "rememberme") {
+  const UserLoginInputStateChangeHandler = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (e.target.name === "rememberme") {
+        setUserLoginInputState({
+          ...userLoginInputState,
+          [e.target.name]: e.target.checked,
+        });
+        return;
+      }
       setUserLoginInputState({
         ...userLoginInputState,
-        [e.target.name]: e.target.checked,
+        [e.target.name]: e.target.value,
       });
-      return;
-    }
-    setUserLoginInputState({
-      ...userLoginInputState,
-      [e.target.name]: e.target.value,
-    });
-  };
+    },
+    [userLoginInputState]
+  );
 
-  const UserLoginSubmitHandler = async () => {
+  const UserLoginSubmitHandler = useCallback(async () => {
     if (
       userLoginInputState.username.trim().length === 0 ||
       userLoginInputState.password.trim().length === 0
@@ -69,7 +70,7 @@ const UserLoginPage = () => {
       .catch((err: Error) => {
         alert(`Login Fail\n${err.message}`);
       });
-  };
+  }, [dispatch, userLoginInputState.password, userLoginInputState.username]);
 
   return (
     <div className="user_login">
@@ -83,6 +84,3 @@ const UserLoginPage = () => {
 };
 
 export default UserLoginPage;
-
-// https://intrepidgeeks.com/tutorial/jwt-certification-mainly-frontend
-// https://davidhwang.netlify.app/TIL/(0320)nextjs%EC%97%90%EC%84%9C-next-cookies-%EC%82%AC%EC%9A%A9-%EC%9D%B4%EC%8A%88/

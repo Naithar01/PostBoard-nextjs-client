@@ -1,3 +1,4 @@
+import React from "react";
 import styles from "../../../styles/index.module.css";
 
 interface IProps {
@@ -12,4 +13,4 @@ const PageHeader = ({ header_text }: IProps) => {
   );
 };
 
-export default PageHeader;
+export default React.memo(PageHeader);
