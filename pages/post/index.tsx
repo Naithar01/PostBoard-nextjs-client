@@ -1,4 +1,5 @@
 import { GetServerSideProps } from "next";
+import Link from "next/link";
 import { Fragment } from "react";
 import PageHeader from "../../components/Layouts/PageHeader/PageHeader";
 import PostItem from "../../components/Post/Read/PostItem";
@@ -22,7 +23,19 @@ interface IProps {
 const PostMainPage = ({ post, query_category }: IProps) => {
   return (
     <div className="post_main_page">
-      <PageHeader header_text="Posts" />
+      <PageHeader header_text={query_category} />
+      {!query_category && (
+        <h1 className={styles.select_cateogry}>
+          <Link href="/category">Select Category</Link>
+        </h1>
+      )}
+
+      {query_category && (
+        <h3 className={styles.show_all_post}>
+          <Link href="/post">Show All Post</Link>
+        </h3>
+      )}
+
       <div className="post_length">
         <p>[Written Post Count: {post.length}]</p>
       </div>

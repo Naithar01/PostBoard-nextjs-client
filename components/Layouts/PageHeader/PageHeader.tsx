@@ -2,7 +2,7 @@ import React from "react";
 import styles from "../../../styles/index.module.css";
 
 interface IProps {
-  header_text: string;
+  header_text: string | string[] | undefined;
 }
 
 const PageHeader = ({ header_text }: IProps) => {

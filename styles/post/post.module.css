@@ -24,3 +24,13 @@
 .post_item_create_at > a {
   color: #0969da;
 }
+
+.select_cateogry,
+.selected_category,
+.show_all_post {
+  color: #0969da;
+}
+
+.show_all_post {
+  margin: 0px 0px 20px 0px;
+}
