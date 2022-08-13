@@ -80,6 +80,10 @@ const Home: NextPage = () => {
             <button
               onClick={() => {
                 setNowCategory("");
+                const ClickedButton = document.querySelector(
+                  `#${nowCategory}`
+                ) as HTMLButtonElement;
+                ClickedButton.style.color = "black";
               }}
             >
               List

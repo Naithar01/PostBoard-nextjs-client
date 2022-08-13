@@ -35,7 +35,7 @@ const Header = () => {
             {user.isLogin && (
               <Fragment>
                 <li className={styles.right_header_menu_item}>
-                  <Link href="/post">Posts</Link>
+                  <Link href="/category">Category</Link>
                 </li>
                 <li className={styles.right_header_menu_item}>
                   <Link href="/post/create">New Post</Link>

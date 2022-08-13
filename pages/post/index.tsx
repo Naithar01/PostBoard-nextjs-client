@@ -16,9 +16,10 @@ export type Post = {
 
 interface IProps {
   post: Post[];
+  query_category: string | string[] | undefined;
 }
 
-const PostMainPage = ({ post }: IProps) => {
+const PostMainPage = ({ post, query_category }: IProps) => {
   return (
     <div className="post_main_page">
       <PageHeader header_text="Posts" />
@@ -35,12 +36,15 @@ const PostMainPage = ({ post }: IProps) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const res = await GetPost();
+  const { query_category } = ctx.query;
+
+  const res = await GetPost(query_category);
   const posts: Post[] = await res.json();
 
   return {
     props: {
       post: posts,
+      query_category: query_category || null,
     },
   };
 };
