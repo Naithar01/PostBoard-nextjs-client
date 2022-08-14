@@ -23,8 +23,6 @@
 
 * 1. Post 생성시 res.status가 201이 아니면 에러 발생 추가
 
-* 1. Post 생성시에 Header에 jwt 토큰 같이 보내도록 구현
-
 * 1. 로그인 상태가 아닐 때 new post등 이동시 로그인 페이지로 이동 구현
 
-* 1. Category 추가 페이지 
+* 1. Post 생성시에 Category를 고를 수 있게 구현 
