@@ -1,5 +1,5 @@
 export const GetPost = async (
-  query_category: string | string[] | undefined
+  query_category?: string | string[] | undefined
 ) => {
   if (query_category) {
     return await fetch(

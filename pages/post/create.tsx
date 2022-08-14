@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useCallback, useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
@@ -5,6 +6,8 @@ import { GetLoginUsernameData } from "../../actions/UserActions";
 import PageHeader from "../../components/Layouts/PageHeader/PageHeader";
 import PostCraeteTemplate from "../../components/Post/Create/PostCreateTemplate";
 import { CreatePost } from "../../Lib/Post";
+
+import styles from "../../styles/post/createpost.module.css";
 
 const PostCreatePage = () => {
   const router = useRouter();
@@ -70,11 +73,14 @@ const PostCreatePage = () => {
 
   useEffect(() => {
     GetAuthorName();
-  }, []);
+  }, [GetAuthorName]);
 
   return (
     <div className="post_create_page">
       <PageHeader header_text="Create Post" />
+      <p className={styles.create_category_page}>
+        <Link href="/category/create">Create Category</Link>
+      </p>
       <PostCraeteTemplate
         CreatePostInputStateChangeHandler={CreatePostInputStateChangeHandler}
         PostCreateSubmitHandler={PostCreateSubmitHandler}
