@@ -9,12 +9,19 @@ interface IProps {
       | React.ChangeEvent<HTMLTextAreaElement>
   ) => void;
   PostCreateSubmitHandler: () => void;
+  ShowContentHandler: () => void;
+  createPostInputState: {
+    title: string;
+    content: string;
+  };
   author: string;
 }
 
 const PostCraeteTemplate = ({
   CreatePostInputStateChangeHandler,
   PostCreateSubmitHandler,
+  ShowContentHandler,
+  createPostInputState,
   author,
 }: IProps) => {
   return (
@@ -31,16 +38,25 @@ const PostCraeteTemplate = ({
           id="title"
           placeholder="Enter ..."
           autoComplete="off"
+          value={createPostInputState.title}
           onChange={CreatePostInputStateChangeHandler}
         />
       </div>
       <div className={styles.post_create_inp}>
         <label htmlFor="content">Content</label>
+        <button
+          type="button"
+          className={styles.show_content_btn}
+          onClick={ShowContentHandler}
+        >
+          Show Content
+        </button>
         <textarea
           name="content"
           id="content"
           placeholder="Enter ..."
           autoComplete="off"
+          value={createPostInputState.content}
           onChange={CreatePostInputStateChangeHandler}
         />
       </div>

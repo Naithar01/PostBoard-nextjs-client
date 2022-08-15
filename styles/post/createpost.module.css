@@ -3,12 +3,38 @@
 }
 
 .post_create_inp > textarea {
-  width: 80%;
-  min-height: 300px;
+  width: 100%;
+  max-width: 700px;
+  min-height: 500px;
+  border-radius: 10px;
+  padding: 5px;
+  border: 1px solid black;
+}
+
+.show_post_content_output {
+  width: 100%;
+  max-width: 700px;
+  min-height: 500px;
+  border: 1px solid black;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.show_post_content_output ul {
+  margin-left: 10px;
+}
+
+.show_post_content_output ol {
+  margin-left: 10px;
 }
 
 .create_category_page {
   color: #539bf5;
   font-size: 17px;
   margin: 0px 0px 20px 0px;
+}
+
+.show_content_btn {
+  display: block;
+  margin: 3px 0px;
 }

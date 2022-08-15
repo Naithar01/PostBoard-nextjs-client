@@ -5,6 +5,7 @@ import { useCookies } from "react-cookie";
 import { GetLoginUsernameData } from "../../actions/UserActions";
 import PageHeader from "../../components/Layouts/PageHeader/PageHeader";
 import PostCraeteTemplate from "../../components/Post/Create/PostCreateTemplate";
+import PostMarkDownRender from "../../components/Post/Create/PostMarkDownRender";
 import { CreatePost } from "../../Lib/Post";
 
 import styles from "../../styles/post/createpost.module.css";
@@ -12,6 +13,7 @@ import styles from "../../styles/post/createpost.module.css";
 const PostCreatePage = () => {
   const router = useRouter();
   const [cookies, setCookie] = useCookies();
+  const [showContent, setShowContent] = useState<boolean>(false);
   const [createPostInputState, setCreatePostInputState] = useState<{
     title: string;
     content: string;
@@ -21,6 +23,10 @@ const PostCreatePage = () => {
   });
 
   const [authorInfo, setAuthorInfo] = useState<string>("");
+
+  const ShowContentHandler = useCallback(() => {
+    setShowContent(!showContent);
+  }, [showContent]);
 
   const GetAuthorName = useCallback(async () => {
     const username: string = await GetLoginUsernameData();
@@ -81,11 +87,22 @@ const PostCreatePage = () => {
       <p className={styles.create_category_page}>
         <Link href="/category/create">Create Category</Link>
       </p>
-      <PostCraeteTemplate
-        CreatePostInputStateChangeHandler={CreatePostInputStateChangeHandler}
-        PostCreateSubmitHandler={PostCreateSubmitHandler}
-        author={authorInfo}
-      />
+      {!showContent && (
+        <PostCraeteTemplate
+          CreatePostInputStateChangeHandler={CreatePostInputStateChangeHandler}
+          PostCreateSubmitHandler={PostCreateSubmitHandler}
+          ShowContentHandler={ShowContentHandler}
+          createPostInputState={createPostInputState}
+          author={authorInfo}
+        />
+      )}
+
+      {showContent && (
+        <PostMarkDownRender
+          markdown={createPostInputState.content}
+          ShowContentHandler={ShowContentHandler}
+        />
+      )}
     </div>
   );
 };
