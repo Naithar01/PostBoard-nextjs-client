@@ -1,25 +1,35 @@
+import { GetStaticPaths, GetStaticProps } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { Fragment, useCallback, useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { GetLoginUsernameData } from "../../actions/UserActions";
 import PageHeader from "../../components/Layouts/PageHeader/PageHeader";
 import PostCraeteTemplate from "../../components/Post/Create/PostCreateTemplate";
 import PostMarkDownRender from "../../components/Post/Create/PostMarkDownRender";
+import { GetCategory } from "../../Lib/Category";
 import { CreatePost } from "../../Lib/Post";
+import { Category } from "../category";
 
 import styles from "../../styles/post/createpost.module.css";
+import PostSelectCategory from "../../components/Post/Create/PostSelectCategory";
 
-const PostCreatePage = () => {
+interface IProps {
+  CategoryList: Category[];
+}
+
+const PostCreatePage = ({ CategoryList }: IProps) => {
   const router = useRouter();
   const [cookies, setCookie] = useCookies();
   const [showContent, setShowContent] = useState<boolean>(false);
   const [createPostInputState, setCreatePostInputState] = useState<{
     title: string;
     content: string;
+    category: string;
   }>({
     title: "",
     content: ``,
+    category: "",
   });
 
   const [authorInfo, setAuthorInfo] = useState<string>("");
@@ -47,18 +57,33 @@ const PostCreatePage = () => {
     [createPostInputState]
   );
 
+  const CreatePostSelectChangeHandler = useCallback(
+    (e: React.ChangeEvent<HTMLSelectElement>) => {
+      setCreatePostInputState({
+        ...createPostInputState,
+        category: e.target.value,
+      });
+    },
+    [createPostInputState]
+  );
+
   const PostCreateSubmitHandler = useCallback(async () => {
     if (
       createPostInputState.title.trim().length === 0 ||
       createPostInputState.content.trim().length === 0
     ) {
-      alert("Enter Title Or Content");
+      return alert("Enter Title Or Content");
+    }
+
+    if (createPostInputState.category.trim().length === 0) {
+      return alert("Select Category");
     }
     const { token } = await cookies;
     await CreatePost(
       createPostInputState.title,
       createPostInputState.content,
-      token
+      token,
+      createPostInputState.category
     )
       .then((res) => {
         if (res.status !== 201) {
@@ -72,6 +97,7 @@ const PostCreatePage = () => {
       });
   }, [
     cookies,
+    createPostInputState.category,
     createPostInputState.content,
     createPostInputState.title,
     router,
@@ -87,14 +113,23 @@ const PostCreatePage = () => {
       <p className={styles.create_category_page}>
         <Link href="/category/create">Create Category</Link>
       </p>
+
       {!showContent && (
-        <PostCraeteTemplate
-          CreatePostInputStateChangeHandler={CreatePostInputStateChangeHandler}
-          PostCreateSubmitHandler={PostCreateSubmitHandler}
-          ShowContentHandler={ShowContentHandler}
-          createPostInputState={createPostInputState}
-          author={authorInfo}
-        />
+        <Fragment>
+          <PostSelectCategory
+            CategoryList={CategoryList}
+            CreatePostSelectChangeHandler={CreatePostSelectChangeHandler}
+          />
+          <PostCraeteTemplate
+            CreatePostInputStateChangeHandler={
+              CreatePostInputStateChangeHandler
+            }
+            PostCreateSubmitHandler={PostCreateSubmitHandler}
+            ShowContentHandler={ShowContentHandler}
+            createPostInputState={createPostInputState}
+            author={authorInfo}
+          />
+        </Fragment>
       )}
 
       {showContent && (
@@ -105,6 +140,18 @@ const PostCreatePage = () => {
       )}
     </div>
   );
+};
+
+export const getStaticProps: GetStaticProps = async () => {
+  const res = await GetCategory();
+  const CategoryList = await res.json();
+
+  return {
+    props: {
+      CategoryList: CategoryList,
+    },
+    revalidate: 1,
+  };
 };
 
 export default PostCreatePage;

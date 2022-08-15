@@ -23,9 +23,10 @@ export const GetPost = async (
 export const CreatePost = async (
   title: string,
   content: string,
-  token: string
+  token: string,
+  category: string
 ) => {
-  return await fetch("http://localhost:4000/api/post", {
+  return await fetch(`http://localhost:4000/api/post?category=${category}`, {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,

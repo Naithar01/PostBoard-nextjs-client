@@ -1,5 +1,6 @@
-.post_create_inp > label {
-  display: block;
+.post_create_inp,
+.post_author_name {
+  margin: 5px 0px 5px 0px;
 }
 
 .post_create_inp > textarea {

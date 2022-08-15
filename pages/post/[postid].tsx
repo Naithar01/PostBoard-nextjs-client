@@ -6,6 +6,7 @@ import { GetPost, GetPostById } from "../../Lib/Post";
 import { Post } from "./index";
 
 import styles from "../../styles/post/postread.module.css";
+import ReactMarkdown from "react-markdown";
 
 interface IParams extends ParsedUrlQuery {
   id: string;
@@ -23,7 +24,9 @@ const PostReadPage = ({ post }: IProps) => {
         <p className={styles.post_read_page_header_author}>{post.author}</p>
         <small>{new Date(post.create_at).toLocaleString()}</small>
       </header>
-      <div className={styles.post_read_page_content}>{post.content}</div>
+      <ReactMarkdown className={styles.post_read_page_content}>
+        {post.content}
+      </ReactMarkdown>
     </div>
   );
 };

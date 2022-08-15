@@ -26,24 +26,24 @@ const PostCraeteTemplate = ({
 }: IProps) => {
   return (
     <form className="post_create_form">
-      <div className="post_author_name">
+      <div className={styles.post_author_name}>
         <label>Author: </label>
         <input value={author} disabled />
       </div>
       <div className={styles.post_create_inp}>
-        <label htmlFor="title">Title</label>
+        <label htmlFor="title">Title: </label>
         <input
           type="text"
           name="title"
           id="title"
-          placeholder="Enter ..."
+          placeholder="Enter Title"
           autoComplete="off"
           value={createPostInputState.title}
           onChange={CreatePostInputStateChangeHandler}
         />
       </div>
       <div className={styles.post_create_inp}>
-        <label htmlFor="content">Content</label>
+        <label htmlFor="content">Content: </label>
         <button
           type="button"
           className={styles.show_content_btn}
@@ -54,7 +54,7 @@ const PostCraeteTemplate = ({
         <textarea
           name="content"
           id="content"
-          placeholder="Enter ..."
+          placeholder="Enter Content"
           autoComplete="off"
           value={createPostInputState.content}
           onChange={CreatePostInputStateChangeHandler}
