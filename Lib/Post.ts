@@ -47,3 +47,12 @@ export const GetPostById = async (postid: string | string[] | undefined) => {
     method: "GET",
   });
 };
+
+export const DeletePost = async (postid: string) => {
+  return await fetch(`http://localhost:4000/api/post/${postid}`, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+    method: "DELETE",
+  });
+};

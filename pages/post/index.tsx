@@ -36,6 +36,12 @@ const PostMainPage = ({ post, query_category }: IProps) => {
         </h3>
       )}
 
+      {query_category && (
+        <h3 className={styles.show_all_post}>
+          <Link href="/category">Select Category</Link>
+        </h3>
+      )}
+
       <div className="post_length">
         <p>[Written Post Count: {post.length}]</p>
       </div>

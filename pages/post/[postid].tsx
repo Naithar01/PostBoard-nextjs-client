@@ -1,12 +1,14 @@
 import { GetStaticPaths, GetStaticProps } from "next";
 import { ParsedUrlQuery } from "querystring";
 import PageHeader from "../../components/Layouts/PageHeader/PageHeader";
-import { GetPost, GetPostById } from "../../Lib/Post";
+import { DeletePost, GetPost, GetPostById } from "../../Lib/Post";
+import ReactMarkdown from "react-markdown";
 
 import { Post } from "./index";
 
 import styles from "../../styles/post/postread.module.css";
-import ReactMarkdown from "react-markdown";
+import { useCookies } from "react-cookie";
+import { useRouter } from "next/router";
 
 interface IParams extends ParsedUrlQuery {
   id: string;
@@ -17,12 +19,36 @@ interface IProps {
 }
 
 const PostReadPage = ({ post }: IProps) => {
+  const router = useRouter();
+  const [cookies, setCookie] = useCookies();
+
+  const DeletePostHandler = async () => {
+    await DeletePost(post.id)
+      .then((res) => {
+        if (res.status >= 300) {
+          throw Error("Some Error");
+        }
+        alert("Success Delete Post");
+        return router.push("/post");
+      })
+      .catch((err) => {
+        return alert("Some Error");
+      });
+  };
+
   return (
     <div className="post_read_page">
       <PageHeader header_text={post.title} />
       <header className={styles.post_read_page_header}>
         <p className={styles.post_read_page_header_author}>{post.author}</p>
         <small>{new Date(post.create_at).toLocaleString()}</small>
+        <div className="post_read_delete_btn">
+          {cookies.username === post.author && (
+            <button type="button" onClick={DeletePostHandler}>
+              Delete
+            </button>
+          )}
+        </div>
       </header>
       <ReactMarkdown className={styles.post_read_page_content}>
         {post.content}
